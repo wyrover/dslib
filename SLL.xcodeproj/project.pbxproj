@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DC341F301A306129007493D3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = DC341F2F1A306129007493D3 /* main.c */; };
+		DC341F381A3066D8007493D3 /* SLL_operations.c in Sources */ = {isa = PBXBuildFile; fileRef = DC341F371A3066D8007493D3 /* SLL_operations.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		DC341F2C1A306129007493D3 /* SLL */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SLL; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC341F2F1A306129007493D3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		DC341F361A30669D007493D3 /* SLL_operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLL_operations.h; sourceTree = "<group>"; };
+		DC341F371A3066D8007493D3 /* SLL_operations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SLL_operations.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +60,9 @@
 		DC341F2E1A306129007493D3 /* SLL */ = {
 			isa = PBXGroup;
 			children = (
+				DC341F371A3066D8007493D3 /* SLL_operations.c */,
 				DC341F2F1A306129007493D3 /* main.c */,
+				DC341F361A30669D007493D3 /* SLL_operations.h */,
 			);
 			path = SLL;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC341F301A306129007493D3 /* main.c in Sources */,
+				DC341F381A3066D8007493D3 /* SLL_operations.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
