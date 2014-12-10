@@ -14,8 +14,10 @@
 int main()
 {
     nodeT* head = NULL;
-    int data_array[] = {1,2,3,4,5};
+    int data_array[] = {1,3,2,2,4,5,5};
     head = sll_create_list(data_array, sizeof(data_array)/sizeof(int));
+    sll_print_list(head);
+    sll_reverse(&head);
     sll_print_list(head);
     return 0;
 }

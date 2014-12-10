@@ -8,14 +8,12 @@
  *
  *  1) Create Node
  *  2) Insert (insert start, insert after, append)
- *  3) Delete
+ *  3) Delete all occurences
  *  4) Reverse
- *  5) Combine (Given the heads of the 2 lists)
+ *  5) Combine & Sort (Given the heads of the 2 lists)
  *  6) Create a list (Given an array)
  *  7) Print elements
  *  8) Modify an element (Given the index)
- *  9) Print
- *
  *
  */
 
@@ -79,10 +77,62 @@ void sll_print_list(const nodeT* head)
 {
     
     nodeT* temp = head;
+    printf("\n");
     while(temp!= NULL) {
-        printf("\n %d", temp->data);
+        printf("\t %d", temp->data);
         temp = temp->next;
     }
     printf("\n");
 }
+
+void sll_reverse(nodeT** head)
+{
+    nodeT* curr = *head;
+    nodeT* prev = NULL;
+    nodeT* next = NULL;
+    
+    while(curr){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    *head = prev;
+}
+
+void sll_delete(nodeT** head, int value)
+{
+    nodeT* prev = NULL;
+    nodeT* curr = *head;
+    
+    if (!(*head))
+    {
+        return;
+    }
+    
+    while (curr)
+    {
+        if ((*head)->data == value) {
+            prev = curr;
+            curr = curr->next;
+            *head = curr;
+            free(prev);
+            continue;
+        }
+        if (curr->data == value)
+        {
+            prev->next = curr->next;
+            free(curr);
+            curr = prev->next;
+        }
+        else
+        {
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+    return;
+    
+}
+
 

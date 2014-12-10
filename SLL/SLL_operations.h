@@ -25,6 +25,7 @@ typedef struct nodeT{
 nodeT* sll_create_list(int* array_data, int size);
 int sll_append(nodeT** head, int data);
 void sll_print_list(const nodeT* head);
-
+void sll_reverse(nodeT** head);
+void sll_delete(nodeT** head, int data);
 
 #endif
