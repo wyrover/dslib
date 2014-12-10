@@ -7,7 +7,7 @@
  *  This file supports the following SLL operations
  *
  *  1) Create Node
- *  2) Insert (insert start, insert after, append)
+ *  2) Insert after
  *  3) Delete all occurences
  *  4) Reverse
  *  5) Combine & Sort (Given the heads of the 2 lists)
@@ -15,6 +15,9 @@
  *  7) Print elements
  *  8) Modify an element (Given the index)
  *
+ *  TODO :
+ *  1. Delete nth element from the last.
+ *  
  */
 
 #include "SLL_operations.h"
@@ -132,7 +135,27 @@ void sll_delete(nodeT** head, int value)
         }
     }
     return;
-    
 }
 
+void sll_insert_after(nodeT* head, int value_to_insert, int value_after)
+{
+    nodeT* curr = head;
+    nodeT* next = NULL;
+    
+    while(curr) {
+        if(curr->data == value_after){
+            nodeT* temp = sll_create_node(value_to_insert);
+            next = curr->next;
+            curr->next = temp;
+            temp->next = next;
+            return;
+        } else {
+            curr= curr->next;
+        }
+    }
+}
 
+nodeT* sll_combine_lists(nodeT* head_1, nodeT* head_2)
+{
+    return NULL;
+}

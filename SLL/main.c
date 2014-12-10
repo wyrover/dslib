@@ -17,7 +17,7 @@ int main()
     int data_array[] = {1,3,2,2,4,5,5};
     head = sll_create_list(data_array, sizeof(data_array)/sizeof(int));
     sll_print_list(head);
-    sll_reverse(&head);
+    sll_insert_after(head,77,1);
     sll_print_list(head);
     return 0;
 }
