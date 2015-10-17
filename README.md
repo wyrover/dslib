@@ -25,7 +25,7 @@ Datastructures
     Singly Linked List : (slist)
     Doubly Linked List : (dlist)
     Skip List          : (skip_lst)
-    jjjkjkkkkkStack              : (stack)
+    Stack              : (stack)
     Queue              : (queue)
     Priority Queue     : (pri_queue)
     DAG                : (dag)
