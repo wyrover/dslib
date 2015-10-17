@@ -22,10 +22,10 @@ Arrays/Lists:
 Datastructures
 =============
 
-    Singly Linked List : (SLL)
-    Doubly Linked List : (DLL)
+    Singly Linked List : (slist)
+    Doubly Linked List : (dlist)
     Skip List          : (skip_lst)
-    Stack              : (stack)
+    jjjkjkkkkkStack              : (stack)
     Queue              : (queue)
     Priority Queue     : (pri_queue)
     DAG                : (dag)
