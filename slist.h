@@ -24,7 +24,7 @@ typedef struct nodeT{
 
 nodeT* slist_create_list(int* array_data, int size);
 int slist_append(nodeT** head, int data);
-void slist_print_list(const nodeT* head);
+void slist_print_list(nodeT* head);
 void slist_reverse(nodeT** head);
 void slist_delete(nodeT** head, int data);
 void slist_insert_after(nodeT* head, int value_to_insert, int value_after);

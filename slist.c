@@ -79,7 +79,7 @@ nodeT* slist_create_list(int array_data[], int size)
     return head;
 }
 
-void slist_print_list(const nodeT* head)
+void slist_print_list(nodeT* head)
 {
 
     nodeT* temp = NULL;
