@@ -31,6 +31,9 @@ static slist_t* slist_create_node(int data)
 {
     slist_t* new_node;
     new_node = (slist_t*)malloc(sizeof(slist_t));
+    if(!new_nodel) {
+        return NULL;
+    }
     new_node-> data = data;
     new_node-> next = NULL;
     return new_node;
