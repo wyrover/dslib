@@ -21,15 +21,16 @@
  */
 
 #include "slist.h"
+#include "dslib.h"
 
 /*
  * Input: Data to initialize
  * Output: A new node initialized to data
  */
-static nodeT* slist_create_node(int data)
+static slist_t* slist_create_node(int data)
 {
-    nodeT* new_node;
-    new_node = (nodeT*)malloc(sizeof(nodeT));
+    slist_t* new_node;
+    new_node = (slist_t*)malloc(sizeof(slist_t));
     new_node-> data = data;
     new_node-> next = NULL;
     return new_node;
@@ -40,9 +41,9 @@ static nodeT* slist_create_node(int data)
  * Input: Head of the list, data to append
  * Output: Success or Failure
  */
-int slist_append(nodeT** head, int data)
+int slist_append(slist_t** head, int data)
 {
-    nodeT* temp = *head;
+    slist_t* temp = *head;
     if (head == NULL) {
 
         return -1;
@@ -58,15 +59,15 @@ int slist_append(nodeT** head, int data)
  * Input: Array to initialize the list with
  * Output: The head of the newly created list
  */
-nodeT* slist_create_list(int array_data[], int size)
+slist_t* slist_create_list(int array_data[], int size)
 {
-    nodeT* head = NULL;
+    slist_t* head = NULL;
     int i = 0;
 
     for (i=0; i<size; i++) {
         if (head == NULL ) {
             /* Create the head */
-            head = (nodeT*)malloc(sizeof(nodeT));
+            head = (slist_t*)malloc(sizeof(slist_t));
             if(!head) {
                 return NULL;
             }
@@ -79,10 +80,21 @@ nodeT* slist_create_list(int array_data[], int size)
     return head;
 }
 
-void slist_print_list(nodeT* head)
+void slist_free_list(slist_t* head)
 {
 
-    nodeT* temp = NULL;
+    slist_t* temp = NULL;
+    temp = head;
+    while(temp){
+        free(temp);
+        temp = temp->next;
+    }
+}
+
+void slist_print_list(slist_t* head)
+{
+
+    slist_t* temp = NULL;
     temp = head;
     printf("\n");
     while(temp!= NULL) {
@@ -92,11 +104,11 @@ void slist_print_list(nodeT* head)
     printf("\n");
 }
 
-void slist_reverse(nodeT** head)
+void slist_reverse(slist_t** head)
 {
-    nodeT* curr = *head;
-    nodeT* prev = NULL;
-    nodeT* next = NULL;
+    slist_t* curr = *head;
+    slist_t* prev = NULL;
+    slist_t* next = NULL;
 
     while(curr){
         next = curr->next;
@@ -107,10 +119,10 @@ void slist_reverse(nodeT** head)
     *head = prev;
 }
 
-void slist_delete(nodeT** head, int value)
+void slist_delete(slist_t** head, int value)
 {
-    nodeT* prev = NULL;
-    nodeT* curr = *head;
+    slist_t* prev = NULL;
+    slist_t* curr = *head;
 
     if (!(*head))
     {
@@ -141,14 +153,14 @@ void slist_delete(nodeT** head, int value)
     return;
 }
 
-void slist_insert_after(nodeT* head, int value_to_insert, int value_after)
+void slist_insert_after(slist_t* head, int value_to_insert, int value_after)
 {
-    nodeT* curr = head;
-    nodeT* next = NULL;
+    slist_t* curr = head;
+    slist_t* next = NULL;
 
     while(curr) {
         if(curr->data == value_after){
-            nodeT* temp = slist_create_node(value_to_insert);
+            slist_t* temp = slist_create_node(value_to_insert);
             next = curr->next;
             curr->next = temp;
             temp->next = next;
@@ -159,7 +171,9 @@ void slist_insert_after(nodeT* head, int value_to_insert, int value_after)
     }
 }
 
-nodeT* slist_combine_lists(nodeT* head_1, nodeT* head_2)
+
+
+slist_t* slist_combine_lists(slist_t* head_1, slist_t* head_2)
 {
     return NULL;
 }

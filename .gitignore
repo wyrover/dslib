@@ -22,5 +22,6 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 
+*.bin
 tags
 cscope*
