@@ -34,4 +34,5 @@ testapp:
 
 clean:
 	rm -rf $(MODULE_BLD_DIR)
+	rm -f core.*
 	cd test; make clean

@@ -13,5 +13,6 @@ $(OBJ):
 	$(CC) $(BIN_ARCH) -o $(OBJ) $(CFLAGS) dslib_ut.c $(LIB) 
 
 clean:
-	rm -rf dslib_ut.bin
-
+	@rm -f dslib_ut.bin
+	@rm -rf *.dSYM
+	@rm -f core.*

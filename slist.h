@@ -22,7 +22,7 @@ typedef struct slist_s{
 
 /*  Function Declaration */
 
-slist_t* slist_create_list(int* array_data, int size);
+void slist_create_list(slist_t** head, int* array_data, int size);
 int slist_append(slist_t** head, int data);
 void slist_print_list(slist_t* head);
 void slist_free_list(slist_t* head);

@@ -46,13 +46,17 @@ static slist_t* slist_create_node(int data)
  */
 int slist_append(slist_t** head, int data)
 {
+	
     slist_t* temp = *head;
-    if (head == NULL) {
+
+    if (temp == NULL) {
 
         return -1;
     }
+	
     while(temp->next !=NULL) {
         temp = temp->next;
+	
     }
     temp->next = slist_create_node(data);
     return 0;
@@ -62,25 +66,29 @@ int slist_append(slist_t** head, int data)
  * Input: Array to initialize the list with
  * Output: The head of the newly created list
  */
-slist_t* slist_create_list(int array_data[], int size)
+void slist_create_list(slist_t** head, int array_data[], int size)
 {
-    slist_t* head = NULL;
     int i = 0;
-
+	int app_ret = 0;
     for (i=0; i<size; i++) {
-        if (head == NULL ) {
+        if ((*head) == NULL ) {
             /* Create the head */
-            head = (slist_t*)malloc(sizeof(slist_t));
-            if(!head) {
-                return NULL;
+            *head = (slist_t*)malloc(sizeof(slist_t));
+            if(!(*head)) {
+                return ;
             }
-            head->data = array_data[0];
+            (*head)->data = array_data[0];
+			(*head)->next = NULL;
         } else {
-            slist_append(&head,array_data[i]);
+            app_ret = slist_append(head,array_data[i]);
+			if (app_ret == -1) {
+				*head = NULL;
+				return;
+			}
         }
     }
 
-    return head;
+    return ;
 }
 
 void slist_free_list(slist_t* head)
