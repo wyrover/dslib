@@ -37,3 +37,53 @@ void merge_sort(int a[], int low, int high)
     }
 }
 
+/* Recursion call stack
+
+[************************]merge_sort
+[************]merge_sort(lo,mid)
+[******]merge_sort(lo,mid)
+[***]merge_sort(lo,mid)
+[**]merge_sort(lo,mid)
+ [**]merge_sort(mid+1,hi)
+[***]merge
+   [***]merge_sort(mid+1,hi)
+   [**]merge_sort(lo,mid)
+    [**]merge_sort(mid+1,hi)
+   [***]merge
+[******]merge
+      [******]merge_sort(mid+1,hi)
+      [***]merge_sort(lo,mid)
+      [**]merge_sort(lo,mid)
+       [**]merge_sort(mid+1,hi)
+      [***]merge
+         [***]merge_sort(mid+1,hi)
+         [**]merge_sort(lo,mid)
+           [**]merge_sort(mid+1,hi)
+         [***]merge
+      [******]merge
+[************]merge
+            [************]merge_sort(mid+1,hi)
+            [******]merge_sort(lo,mid)
+            [***]merge_sort(lo,mid)
+            [**]merge_sort(lo,mid)
+             [**]merge_sort(mid+1,hi)
+            [***]merge
+               [***]merge_sort(mid+1,hi)
+               [**]merge_sort(lo,mid)
+                 [**]merge_sort(mid+1,hi)
+               [***]merge
+            [******]merge
+                  [******]merge_sort(mid+1,hi)
+                  [***]merge_sort(lo,mid)
+                  [**]merge_sort(lo,mid)
+                    [**]merge_sort(mid+1,hi)
+                  [***]merge
+                     [***]merge_sort(mid+1,hi)
+                     [**]merge_sort(lo,mid)
+                      [**]merge_sort(mid+1,hi)
+                     [***]merge
+                  [******]merge
+            [************]merge
+[************************]merge
+
+*/
