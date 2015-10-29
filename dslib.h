@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <time.h>
 
 
 typedef void (*ut_func_t)(void) ;
@@ -27,5 +28,6 @@ typedef enum dslib_ret_s {
 
 
 void merge_sort(int a[], int low, int high);
+void quick_sort(int a[], int left, int right);
 
 #endif

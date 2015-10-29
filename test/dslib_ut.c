@@ -21,8 +21,13 @@ static void print_array(int a[], int n )
 
 static void run_ut(ut_func_t ut_func, const char* module_name)
 {
+    clock_t t;
     printf("\n<--------------- %s UT START -------------->\n",module_name);
+    t = clock();
     (*ut_func)();
+    t = clock() - t;
+    double time_taken = ((double)t)/CLOCKS_PER_SEC;
+    printf("\n Time = %f seconds \n",time_taken);
     printf("\n<--------------- %s UT END  --------------->\n",module_name);
 }
 
@@ -30,7 +35,7 @@ void slist_ut()
 {
     slist_t* head      = NULL;
     int data_array[] = {1,3,2,2,4,5,5};
-  
+
 	slist_create_list(&head, data_array, sizeof(data_array)/sizeof(int));
 	if (head == NULL) {
 		printf("\nError in linked list creation.\n");
@@ -56,9 +61,23 @@ void merge_sort_ut()
     return;
 }
 
+void quick_sort_ut()
+{
+    int test_array [] = { 65,23,1,6,0,1,456,12 };
+    printf("\nBefore Quick Sort \n");
+    int n = sizeof(test_array)/sizeof(test_array[0]);
+    print_array(test_array, n);
+    quick_sort(test_array, 0, n - 1);
+    printf("\nAfter Quick Sort \n");
+    print_array(test_array, n);
+    return;
+}
+
+
 int main()
 {
     run_ut(slist_ut, "slist");
     run_ut(merge_sort_ut,"merge_sort");
+    run_ut(quick_sort_ut,"quick_sort");
     return 0;
 }
