@@ -23,5 +23,6 @@ xcuserdata
 *.xcuserstate
 
 *.bin
+*tags*
 tags
 cscope*
