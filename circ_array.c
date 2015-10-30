@@ -73,6 +73,7 @@ void circ_array_print(circ_array_t* array_handle)
     int start = array_handle->read_head;
     int end   = array_handle->write_head;
     int i=0;
+    int N=array_handle->max_items;
     if (!array_handle) {
         return;
     }
@@ -83,7 +84,7 @@ void circ_array_print(circ_array_t* array_handle)
     }
     printf("\n");
 
-    for (i=start; i!=end ; i++) {
+    for (i=start; i!=end ; i=(i+1)%N) {
         printf("\t%d", array_handle->buff_mem_ptr[i]);
     }
     printf("\n");

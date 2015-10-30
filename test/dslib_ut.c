@@ -79,11 +79,8 @@ void circ_array_ut()
     int read_data = 0;
     int i = 0;
     circ_array_t* test_hdl = NULL;
-    test_hdl = circ_array_create(10);
-    circ_array_write(test_hdl,111);
-    circ_array_write(test_hdl,12);
+    test_hdl = circ_array_create(5);
     circ_array_write(test_hdl,13);
-    circ_array_write(test_hdl,14);
     circ_array_write(test_hdl,14);
     circ_array_write(test_hdl,15);
     circ_array_write(test_hdl,16);
@@ -91,10 +88,12 @@ void circ_array_ut()
     circ_array_write(test_hdl,99);
 
     circ_array_print(test_hdl);
-    for (i = 0 ; i < 11 ; i++) {
+    for (i = 0 ; i < 5 ; i++) {
         circ_array_read(test_hdl, &read_data);
         circ_array_print(test_hdl);
     }
+
+
 }
 
 int main()
