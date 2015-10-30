@@ -7,9 +7,10 @@
 //
 
 #include "slist.h"
+#include "circ_array.h"
 #include "dslib.h"
 
-static void print_array(int a[], int n )
+static void print_array(int a[], int n)
 {
     int i=0;
     for (i=0; i < n; i++) {
@@ -73,11 +74,34 @@ void quick_sort_ut()
     return;
 }
 
+void circ_array_ut()
+{
+    int read_data = 0;
+    int i = 0;
+    circ_array_t* test_hdl = NULL;
+    test_hdl = circ_array_create(10);
+    circ_array_write(test_hdl,111);
+    circ_array_write(test_hdl,12);
+    circ_array_write(test_hdl,13);
+    circ_array_write(test_hdl,14);
+    circ_array_write(test_hdl,14);
+    circ_array_write(test_hdl,15);
+    circ_array_write(test_hdl,16);
+    circ_array_write(test_hdl,18);
+    circ_array_write(test_hdl,99);
+
+    circ_array_print(test_hdl);
+    for (i = 0 ; i < 11 ; i++) {
+        circ_array_read(test_hdl, &read_data);
+        circ_array_print(test_hdl);
+    }
+}
 
 int main()
 {
     run_ut(slist_ut, "slist");
     run_ut(merge_sort_ut,"merge_sort");
     run_ut(quick_sort_ut,"quick_sort");
+    run_ut(circ_array_ut,"circ_array");
     return 0;
 }
