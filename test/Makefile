@@ -1,4 +1,4 @@
-CC=/usr/bin/gcc
+CC=/usr/bin/g++
 AR=/usr/bin/ar
 
 CFLAGS = -I. -I../ -g -Wall -Werror
@@ -10,7 +10,7 @@ LIB = ../build/libds.a
 all: $(OBJ) 
 
 $(OBJ):
-	$(CC) $(BIN_ARCH) -o $(OBJ) $(CFLAGS) dslib_ut.c $(LIB) 
+	$(CC) $(BIN_ARCH) -o $(OBJ) $(CFLAGS) dslib_ut.cpp $(LIB) 
 
 clean:
 	@rm -f dslib_ut.bin

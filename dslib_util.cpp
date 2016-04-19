@@ -1,4 +1,59 @@
-#include "dslib.h"
+void swap(int& a, int& b) 
+{
+    int temp;
+    
+    temp = a;
+    a = b;
+    b = temp;
+    return;
+}
+
+
+
+void selection_sort(int test_array[], int num_elems)
+{
+    int i,j = 0;
+    
+    for (i = 0; i < num_elems; i++ ) {
+        for (j = i; j < num_elems ; j++) {
+            if (test_array[j]  <= test_array[i]) {
+                swap(test_array[i], test_array[j]);
+            }
+        }
+    }
+}
+
+
+void bubble_sort(int test_array[], int num_elems)
+{
+    int i,j = 0;
+    
+    for (i = 0; i < num_elems - 1; i++ ) {
+        for (j = 0; j < num_elems-i -1  ; j++) {
+            if (test_array[j]  >= test_array[j+1]) {
+                swap(test_array[j], test_array[j+1]);
+               
+            }
+      
+       }
+    }
+}
+
+
+void insertion_sort(int test_array[], int num_elems)
+{
+    
+    int i,j = 0;
+    
+    for (i = 0; i < num_elems; i++ ) {
+        for (j = i; j < num_elems ; j++) {
+            if (test_array[j]  <= test_array[i]) {
+                swap(test_array[i], test_array[j]);
+            }
+        }
+    }
+    
+}
 
 
 static void merge(int a[], int low, int mid, int high)
@@ -22,6 +77,36 @@ static void merge(int a[], int low, int mid, int high)
     while (k >= 0) {
         a[low + k] = b[k];
         k--;
+    }
+}
+
+static void partition(int a[], int pivot, int left, int right)
+{
+    int i = left;
+    int j = right;
+
+    while(i<=j) {
+        while (a[i] < a[pivot]) {
+            i++;
+        }
+        while (a[j] > a[pivot]) {
+            j--;
+        }
+        if (i <= j) {
+            swap(a[i] , a[j]);
+            i++;
+            j--;
+        }
+    }
+}
+
+void quick_sort(int a[], int left, int right)
+{
+    int pivot = (right + left)/2;
+    if (left < right) {
+        partition(a,pivot,left, right);
+        quick_sort(a, left, pivot );
+        quick_sort(a,pivot+1, right);
     }
 }
 

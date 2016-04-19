@@ -79,14 +79,14 @@ void circ_array_print(circ_array_t* array_handle)
     }
 
     if (start == end) {
-        printf("\n Empty Array \n");
+        cout <<"\n Empty Array \n";
         return;
     }
-    printf("\n");
+    cout <<endl;
 
     for (i=start; i!=end ; i=(i+1)%N) {
-        printf("\t%d", array_handle->buff_mem_ptr[i]);
+        cout <<"\t" << array_handle->buff_mem_ptr[i];
     }
-    printf("\n");
+    cout <<endl;
     return;
 }
