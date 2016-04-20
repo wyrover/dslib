@@ -14,6 +14,7 @@ local.properties
 #Binary files
 *.out
 *.o
+.bin
 
 # Eclipse Core
 .project
@@ -59,5 +60,5 @@ local.properties
 .vscode
 *.db*
 .*browse*
-
+.DS_store
 
