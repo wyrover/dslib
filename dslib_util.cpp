@@ -1,3 +1,18 @@
+#include "dslib.h"
+
+bool lin_search(int arr[], int value, int num_elems, int* idx) 
+{  
+    for(int i=0; i<num_elems; i++) {
+        if (arr[i] == value) {
+           *idx = i;
+           return true; 
+        }
+            
+    }
+
+    return false;
+}
+
 void swap(int& a, int& b) 
 {
     int temp;
@@ -121,6 +136,35 @@ void merge_sort(int a[], int low, int high)
         merge(a, low, mid, high);
     }
 }
+
+
+
+
+bool bin_search(int arr[], int value, int num_elems, int* idx)
+{
+ 
+    int mid = 0;
+    int lo  = 0;
+    int hi = num_elems - 1;
+    
+    quick_sort(arr, 0, hi);
+    
+    while (lo <= hi) {
+        mid =(lo + hi)/2 ;
+        cout << "lo :" <<lo<<"  Mid  " <<mid <<"  hi  :"<<hi<<endl;   
+        if (arr[mid] == value) {
+                *idx = mid;
+                return true;
+            } else if (arr[mid] > value) {
+                hi = mid -1;
+            } else if (arr[mid] < value) {
+               lo = mid +1;         
+        }     
+    }    
+      
+   return false;    
+}
+
 
 /* Recursion call stack
 

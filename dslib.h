@@ -29,7 +29,8 @@ typedef enum dslib_ret_s {
 
 /* Algorithmic API definitions */
 
-
+bool bin_search(int arr[], int value, int num_elems, int* idx);
+bool lin_search(int arr[], int value, int num_elems, int* idx);
 void merge_sort(int a[], int low, int high);
 void quick_sort(int a[], int left, int right);
 void bubble_sort(int a[], int n);

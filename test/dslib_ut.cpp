@@ -9,6 +9,7 @@
 #include "slist.h"
 #include "circ_array.h"
 #include "dslib.h"
+#include "skip_list.h"
 
 static void print_array(int a[], int n)
 {
@@ -130,9 +131,70 @@ void circ_array_ut()
 
 
 }
+void bin_search_ut()
+{
+    int idx = 0, value = 1;
+    int test_array [] = { 65,23,1,6,0,1,456,12 };
+    int num_elems = sizeof(test_array)/sizeof(test_array[0]);
+
+    if (bin_search(test_array, value, num_elems,  &idx)) {
+        cout << "Found value  " << value << " index: "<<idx<<endl;
+    } else {
+            cout << "Could not find value  :" << value;
+    }
+
+}
+
+void lin_search_ut()
+{
+    int idx = 0, value = 1;
+
+    int test_array [] = { 65,23,1,6,0,1,456,12 };
+    int num_elems = sizeof(test_array)/sizeof(test_array[0]);
+    if (lin_search(test_array, value, num_elems, &idx)) {
+        cout << "Found value " << value << " index: "<<idx<<endl;
+    } else {
+        cout << "Could not find value  :" << value;
+    }
+}
+
+
+void skip_list_ut()
+{
+      SkipList* sk_lst = new SkipList();
+
+      sk_lst->insertNode(1);
+      sk_lst->printAllRows();
+      sk_lst->insertNode(23);
+      sk_lst->printAllRows();
+      sk_lst->insertNode(55);
+      sk_lst->printAllRows();
+      sk_lst->insertNode(57);
+      sk_lst->printAllRows();
+      sk_lst->insertNode(22);
+      sk_lst->printAllRows();
+      sk_lst->deleteNode(1);
+      sk_lst->printAllRows();
+      SkipListNode* pTemp =sk_lst->searchNode(55);
+      if(pTemp) {
+        cout <<"Found 55"<<endl;
+      }
+
+       pTemp =sk_lst->searchNode(1);
+      if(pTemp) {
+        cout <<"Found 1" <<endl;
+      }
+
+       pTemp =sk_lst->searchNode(22);
+      if(pTemp) {
+        cout <<"Found 22"<<endl;
+      }
+      sk_lst->printAllRows();
+}
 
 int main()
 {
+    #ifdef ALL_UT
     run_ut(slist_ut, "slist");
     run_ut(merge_sort_ut,"merge_sort");
     run_ut(quick_sort_ut,"quick_sort");
@@ -140,5 +202,9 @@ int main()
     run_ut(insertion_sort_ut,"insertion_sort");
     run_ut(bubble_sort_ut,"bubble_sort");
     run_ut(circ_array_ut,"circ_array");
+    run_ut(lin_search_ut, "lin_search");
+    run_ut(bin_search_ut, "bin_search");
+    #endif
+    run_ut(skip_list_ut,"skip_list");
     return 0;
 }
