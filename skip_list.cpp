@@ -121,7 +121,7 @@ void SkipList::bumpUpHead()
     _height++;
 }
 
-void SkipList::insertNode(int value)
+void SkipList::insert(int value)
 {
     SkipListNode* pCurr = NULL;
     SkipListNode* pTravDown = NULL;
@@ -157,7 +157,7 @@ void SkipList::insertNode(int value)
         } else {
 
             SkipListNode* anchor = NULL;
-            anchor = GetFloorEntry(value);
+            anchor = getFloorEntry(value);
 
             if (anchor) {
                 SkipListNode* pNew = new SkipListNode(value);
@@ -204,66 +204,113 @@ int SkipList::computeHeight(SkipListNode* pStart)
     return height;
 }
 
-void SkipList::deleteNode(int value)
+SkipListNode* SkipList::findNewHead()
 {
-    SkipListNode* pTravDown = searchNode(value);
+    if(!_pHead) {
+        return NULL;
+    }
+
+    SkipListNode* pTemp = getFloorEntry(_pHead->_value);
+
+    if (pTemp->_pRight) {
+        pTemp = pTemp->_pRight;
+    } else { /* Only element present currently is the head*/
+
+        return NULL;
+    }
+
+    while(pTemp->_pUp) {
+        pTemp = pTemp->_pUp;
+
+    }
+
+    return pTemp;
+}
+
+void SkipList::deleteNonHead(int value)
+{
+    SkipListNode* pTravDown = search(value);
     SkipListNode* pPrevNode = NULL;
     SkipListNode* pNextNode = NULL;
     SkipListNode* pBackNode = NULL;
-    bool isNewHeadFound = false;
+
+    while(pTravDown) {
+        pPrevNode = pTravDown;
+        pNextNode = pTravDown->_pRight;
+        pBackNode = pTravDown->_pLeft;
+
+        if(pNextNode && pBackNode ) {
+            pNextNode->_pLeft = NULL;
+            pBackNode->_pRight = pNextNode;
+            pNextNode->_pLeft = pBackNode;
+        } else if (pBackNode && !pNextNode) {
+            pBackNode->_pRight = NULL;
+        }
+
+        pTravDown=pTravDown->_pDown;
+        delete pPrevNode;
+    }
+}
+
+void SkipList::updateHeadValue(int newValue)
+{
+    SkipListNode* pStart = _pHead;
+
+    while (pStart) {
+        pStart->_value = newValue;
+        pStart = pStart->_pDown;
+    }
+}
+
+void SkipList::remove(int value)
+{
+    SkipListNode* pTravDown = search(value);
+    SkipListNode* pPrevNode = NULL;
+    SkipListNode* pNextNode = NULL;
 
     if (!pTravDown) {
-        cout <<" Value  " <<value<<"not present ."<<endl;
-    } else { //Value present
-        /* Deleting the head element */
-        if(pTravDown == _pHead) {
+        cout <<" Value  " <<value<<" not present ."<<endl;
+        return;
+    }
+
+    if (!_pHead) {
+        cout << " Empty Skip List " <<endl;
+        return;
+    }
+    /* Deleting the head element */
+    if(pTravDown == _pHead) {
+        SkipListNode* newHead = findNewHead();
+        if (!newHead) {
+            /*Only Head column present . Just delete and set HEAD = NULL */
             while(pTravDown) {
                 pPrevNode = pTravDown;
                 pNextNode = pTravDown->_pRight;
                 if(pNextNode ) {
-                    if(!isNewHeadFound) {
-                        _pHead = pNextNode;
-                    }
                     pNextNode->_pLeft = NULL;
                 }
 
                 pTravDown=pTravDown->_pDown;
                 delete pPrevNode;
             }
-
-            if(!isNewHeadFound) {
-                _pHead = NULL;
-            } else {
-                if ((_pHead) && (_pHead->_pRight != NULL)) {
-                    bumpUpHead();
-                }
-               _height = computeHeight(_pHead);
-            }
+            _pHead = NULL;
+            _height = 0;
         } else {
-            /*Delete a non-head element*/
-            while(pTravDown) {
-                pPrevNode = pTravDown;
-                pNextNode = pTravDown->_pRight;
-                pBackNode = pTravDown->_pLeft;
-
-                if(pNextNode && pBackNode ) {
-                    pNextNode->_pLeft = NULL;
-                    pBackNode->_pRight = pNextNode;
-                    pNextNode->_pLeft = pBackNode;
-                } else if (pBackNode && !pNextNode) {
-                    pBackNode->_pRight = NULL;
-                }
-
-                pTravDown=pTravDown->_pDown;
-                delete pPrevNode;
-            }
-
+            /*New HEAD found. Replace HEAD column with the next biggest element
+             * and delete the column having the next biggest element after
+             * the HEAD ( non HEAD element)
+             */
+            int nextBiggest = newHead->_value;
+            deleteNonHead(nextBiggest);
+            updateHeadValue(nextBiggest);
         }
-    }
 
+    } else {
+        /*Delete a non-head element*/
+        deleteNonHead(value);
+    }
 }
 
-SkipListNode* SkipList::GetFloorEntry(int value)
+SkipListNode* SkipList::getFloorEntry(int value)
 {
     SkipListNode* pTemp = _pHead;
 
@@ -281,7 +328,7 @@ SkipListNode* SkipList::GetFloorEntry(int value)
     return pTemp;
 }
 
-SkipListNode* SkipList::searchNode(int value)
+SkipListNode* SkipList::search(int value)
 {
     SkipListNode* pTemp = _pHead;
 
@@ -306,11 +353,14 @@ SkipListNode* SkipList::searchNode(int value)
 }
 
 
-void SkipList::printAllRows()
+void SkipList::print()
 {
     SkipListNode* pLevel = NULL;
     SkipListNode* pRow = NULL;
 
+    if(!_pHead) {
+        cout <<"Empty List" <<endl;
+    }
     cout<<"Height : "<<_height<<endl;
     for(pLevel=_pHead; pLevel!=NULL; pLevel=pLevel->_pDown) {
         for(pRow=pLevel; pRow!=NULL; pRow=pRow->_pRight) {

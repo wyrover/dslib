@@ -27,20 +27,23 @@ class SkipList {
         int _height;
         SkipListNode* _pHead;
         SkipListNode* _pLastNode;
-        SkipListNode* GetFloorEntry(int value);
+        SkipListNode* getFloorEntry(int value);
         void insertInUpperRow(SkipListNode* anchor, int value);
         void insertRowAboveHead(SkipListNode* newHead, int value);
         void bumpUpHead();
-        int computeHeight(SkipListNode* pStart);
+        int  computeHeight(SkipListNode* pStart);
+        int  getNumInsertions();
+        SkipListNode* findNewHead();
+        void deleteNonHead(int value);
+        void updateHeadValue(int value);
 
     public:
         SkipList(float prob=0.5);
         ~SkipList();
-        void insertNode(int value);
-        void deleteNode(int value);
-        SkipListNode* searchNode(int value);
-        void printAllRows();
-        int  getNumInsertions();
+        void insert(int value);
+        void remove(int value);
+        SkipListNode* search(int value);
+        void print();
 };
 
 #endif//__SKIP_LIST

@@ -163,33 +163,45 @@ void skip_list_ut()
 {
       SkipList* sk_lst = new SkipList();
 
-      sk_lst->insertNode(1);
-      sk_lst->printAllRows();
-      sk_lst->insertNode(23);
-      sk_lst->printAllRows();
-      sk_lst->insertNode(55);
-      sk_lst->printAllRows();
-      sk_lst->insertNode(57);
-      sk_lst->printAllRows();
-      sk_lst->insertNode(22);
-      sk_lst->printAllRows();
-      sk_lst->deleteNode(1);
-      sk_lst->printAllRows();
-      SkipListNode* pTemp =sk_lst->searchNode(55);
+      sk_lst->insert(1);
+      sk_lst->print();
+      sk_lst->insert(23);
+      sk_lst->print();
+      sk_lst->insert(55);
+      sk_lst->print();
+      sk_lst->insert(57);
+      sk_lst->print();
+      sk_lst->insert(22);
+      sk_lst->print();
+      sk_lst->remove(1);
+      sk_lst->print();
+
+      sk_lst->remove(22);
+      sk_lst->print();
+      sk_lst->remove(57);
+      sk_lst->print();
+      sk_lst->remove(1);
+      sk_lst->print();
+      SkipListNode* pTemp =sk_lst->search(55);
       if(pTemp) {
         cout <<"Found 55"<<endl;
       }
 
-       pTemp =sk_lst->searchNode(1);
+       pTemp =sk_lst->search(1);
       if(pTemp) {
         cout <<"Found 1" <<endl;
       }
 
-       pTemp =sk_lst->searchNode(22);
+       pTemp =sk_lst->search(22);
       if(pTemp) {
         cout <<"Found 22"<<endl;
       }
-      sk_lst->printAllRows();
+
+      sk_lst->remove(23);
+      sk_lst->print();
+
+      sk_lst->remove(55);
+      sk_lst->print();
 }
 
 int main()
