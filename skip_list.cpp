@@ -128,11 +128,13 @@ void SkipList::insert(int value)
 
     int num_extra_ins = getNumInsertions();
 
+    /* Skip List empty. Create head */
      if (!_pHead) {
          _pHead= new SkipListNode(value);
         _pLastNode = _pHead;
         _height+= num_extra_ins;
 
+        /* Extra insertions for the first head insertion scenario */
         while (num_extra_ins) {
             pCurr = new SkipListNode(value);
             pCurr->_pUp = _pLastNode;
@@ -141,7 +143,9 @@ void SkipList::insert(int value)
             num_extra_ins--;
         }
     } else {
+        /* Skip List not empty. Insert at the right place */
         if (value <_pHead->_value) {
+            /* Value to insert is lesser than head. Make this the new head */
             pTravDown = _pHead;
             _pHead= new SkipListNode(value);
             _height++;
@@ -155,14 +159,18 @@ void SkipList::insert(int value)
                 pTravDown = pTravDown->_pDown;
             }
         } else {
-
+            /* Head unchanged. Insert in the middle of the end of the skip
+             * list*/
             SkipListNode* anchor = NULL;
+            /* anchor is the pointer to the node just before the new node in the
+             * lowest level */
             anchor = getFloorEntry(value);
 
             if (anchor) {
                 SkipListNode* pNew = new SkipListNode(value);
                 SkipListNode* nextNode = anchor->_pRight;
 
+                /* Create the default insertion in the lowest level */
                 pNew->_pLeft = anchor;
                 anchor->_pRight = pNew;
                 if (nextNode) {
@@ -171,6 +179,7 @@ void SkipList::insert(int value)
                 }
                 _pLastNode = pNew;
 
+                /* Make the extra insertions for the new node */
                 for (int i =0; i<num_extra_ins; i++) {
                     while(anchor->_pUp == NULL && (anchor->_pLeft)) {
                         anchor = anchor->_pLeft;
@@ -229,6 +238,8 @@ SkipListNode* SkipList::findNewHead()
 
 void SkipList::deleteNonHead(int value)
 {
+
+    /* Get the topmost level of the node with the value to delete */
     SkipListNode* pTravDown = search(value);
     SkipListNode* pPrevNode = NULL;
     SkipListNode* pNextNode = NULL;
@@ -239,11 +250,13 @@ void SkipList::deleteNonHead(int value)
         pNextNode = pTravDown->_pRight;
         pBackNode = pTravDown->_pLeft;
 
+        /* The node has both front and back elements*/
         if(pNextNode && pBackNode ) {
             pNextNode->_pLeft = NULL;
             pBackNode->_pRight = pNextNode;
             pNextNode->_pLeft = pBackNode;
         } else if (pBackNode && !pNextNode) {
+            /* Node just has back elements */
             pBackNode->_pRight = NULL;
         }
 

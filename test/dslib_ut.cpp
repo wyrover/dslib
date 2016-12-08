@@ -10,6 +10,8 @@
 #include "circ_array.h"
 #include "dslib.h"
 #include "skip_list.h"
+#include "bst.h"
+#include "disjoint_set.h"
 
 static void print_array(int a[], int n)
 {
@@ -204,6 +206,38 @@ void skip_list_ut()
       sk_lst->print();
 }
 
+void bst_ut()
+{
+    Bst* tree_1 = new Bst();
+    tree_1->insert(43);
+    tree_1->insert(32);
+    tree_1->insert(12);
+    tree_1->insert(12);
+    tree_1->insert(64);
+    tree_1->insert(56);
+    tree_1->insert(72);
+    tree_1->inOrder();
+    BstNode* closest_node = tree_1->closestNode(72);
+    cout << "\n Closest Node to 72 is "<< closest_node->getData();
+}
+void djset_ut()
+{
+    vector<int> inp_groups;
+    inp_groups.push_back(1);
+    inp_groups.push_back(2);
+    inp_groups.push_back(3);
+    inp_groups.push_back(4);
+    inp_groups.push_back(5);
+
+    DisjointSet djs(inp_groups);
+    cout << djs;
+    djs.makeSet(1,2);
+    djs.makeSet(2,3);
+    djs.makeSet(1,3);
+    cout << djs;
+
+}
+
 int main()
 {
     #ifdef ALL_UT
@@ -216,7 +250,9 @@ int main()
     run_ut(circ_array_ut,"circ_array");
     run_ut(lin_search_ut, "lin_search");
     run_ut(bin_search_ut, "bin_search");
-    #endif
     run_ut(skip_list_ut,"skip_list");
+    run_ut(bst_ut, "bst");
+    #endif
+    run_ut(djset_ut, "disjoint_set");
     return 0;
 }

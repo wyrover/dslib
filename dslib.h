@@ -16,6 +16,9 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+#include <exception>
+#include <set>
+#include <vector>
 
 using namespace std;
 

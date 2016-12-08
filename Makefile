@@ -13,7 +13,7 @@ MODULE_BLD_DIR = $(DSLIB_BLD_DIR)
 MODULE_OBJ = $(MODULE_BLD_DIR)/$(MODULE_OBJ_NAME)
 MODULE_OBJ_FILES = $(addprefix $(MODULE_BLD_DIR)/, $(patsubst %.cpp, %.o, $(wildcard *.cpp )))
 
-CFLAGS = -I./ -Wall -Werror -g
+CFLAGS = -I./ -Wall -Werror -g -std=c++11
 LINKOPTS = 
 
 all:  $(MODULE_BLD_DIR) $(MODULE_OBJ) testapp
