@@ -12,6 +12,7 @@
 #include "skip_list.h"
 #include "bst.h"
 #include "disjoint_set.h"
+#include "graph.h"
 
 static void print_array(int a[], int n)
 {
@@ -220,6 +221,7 @@ void bst_ut()
     BstNode* closest_node = tree_1->closestNode(72);
     cout << "\n Closest Node to 72 is "<< closest_node->getData();
 }
+
 void djset_ut()
 {
     vector<int> inp_groups;
@@ -238,6 +240,15 @@ void djset_ut()
 
 }
 
+void graph_ut()
+{
+    Graph* g = new Graph();
+    g->addVertex("1");
+    g->addVertex("2");
+    g->addVertex("3");
+}
+
+
 int main()
 {
     #ifdef ALL_UT
@@ -254,5 +265,6 @@ int main()
     run_ut(bst_ut, "bst");
     #endif
     run_ut(djset_ut, "disjoint_set");
+    run_ut(graph_ut, "graph");
     return 0;
 }
