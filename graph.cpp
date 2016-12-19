@@ -1,10 +1,10 @@
 #include "graph.h"
 #include "dslib.h"
 
-Vertex::Vertex(const string& name )
+ostream& operator << (ostream& os, Vertex& v)
 {
-
-
+    os <<v.name <<endl;
+    return os;
 }
 
 void Graph::addVertex(const string &name)
@@ -45,12 +45,21 @@ void Graph::dfs(const string& start_vert)
 void Graph::bfs(const string& start_vert)
 {
     Vertex* f = work.find(start_vert)->second;
-
     queue<Vertex> bfs_q;
 
     bfs_q.push(*f);
-    while (!bfs_q.empty()) {
 
+    while (!bfs_q.empty()) {
+        Vertex v = bfs_q.front();
+        cout << v <<endl;
+
+        v.is_visited = true;
+        for (auto&i : v.adj) {
+            if (!(i.second)->is_visited) {
+                bfs_q.push(*i.second);
+            }
+        }
+        bfs_q.pop();
 
     }
 

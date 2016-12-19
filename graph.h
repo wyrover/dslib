@@ -1,6 +1,7 @@
 #include "dslib.h"
 
 class Vertex {
+    friend ostream& operator << (ostream& os, Vertex& v);
     friend class Graph;
     typedef pair<int, Vertex*> ve;
     vector<ve> adj; //cost of edge, destination Vertex
