@@ -48,18 +48,19 @@ void Graph::bfs(const string& start_vert)
     queue<Vertex> bfs_q;
 
     bfs_q.push(*f);
+    f->is_visited = true;
 
     while (!bfs_q.empty()) {
         Vertex v = bfs_q.front();
-        cout << v <<endl;
+        cout << v ;
 
-        v.is_visited = true;
+        bfs_q.pop();
         for (auto&i : v.adj) {
             if (!(i.second)->is_visited) {
+               (i.second)->is_visited = true;
                 bfs_q.push(*i.second);
             }
         }
-        bfs_q.pop();
 
     }
 

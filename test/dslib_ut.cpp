@@ -246,6 +246,10 @@ void graph_ut()
     g->addVertex("1");
     g->addVertex("2");
     g->addVertex("3");
+    g->addedge("1","2",1);
+    g->addedge("2", "3",1);
+    g->addedge("3","1",1);
+    g->bfs("3");
 }
 
 
@@ -263,8 +267,8 @@ int main()
     run_ut(bin_search_ut, "bin_search");
     run_ut(skip_list_ut,"skip_list");
     run_ut(bst_ut, "bst");
-    #endif
     run_ut(djset_ut, "disjoint_set");
+    #endif
     run_ut(graph_ut, "graph");
     return 0;
 }
