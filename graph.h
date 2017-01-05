@@ -18,7 +18,8 @@ public:
     Graph();
     void bfs(const string& v);
     void dfs(const string& v);
+    void dfsUtil(const string& v);
     void addVertex(const string&);
-    void addedge(const string& from, const string& to, double cost);
+    void addEdge(const string& from, const string& to, double cost);
 };
 

@@ -20,7 +20,7 @@ void Graph::addVertex(const string &name)
     cout << "\nVertex already exists!";
 }
 
-void Graph::addedge(const string& from, const string& to, double cost)
+void Graph::addEdge(const string& from, const string& to, double cost)
 {
     Vertex *f = (work.find(from)->second);
     Vertex *t = (work.find(to)->second);
@@ -33,6 +33,15 @@ Graph::Graph()
 
 
 }
+
+void Graph::dfsUtil(const string& start_vert)
+{
+
+
+
+
+}
+
 
 void Graph::dfs(const string& start_vert)
 {

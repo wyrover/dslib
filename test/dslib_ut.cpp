@@ -243,13 +243,19 @@ void djset_ut()
 void graph_ut()
 {
     Graph* g = new Graph();
+    g->addVertex("0");
     g->addVertex("1");
     g->addVertex("2");
     g->addVertex("3");
-    g->addedge("1","2",1);
-    g->addedge("2", "3",1);
-    g->addedge("3","1",1);
-    g->bfs("3");
+
+    g->addEdge("0", "1",1);
+    g->addEdge("0", "2",1);
+    g->addEdge("1", "2",1);
+    g->addEdge("2", "0",1);
+    g->addEdge("2", "3",1);
+    g->addEdge("3", "3",1);
+    g->bfs("2");
+    //g->bfs("2");
 }
 
 
