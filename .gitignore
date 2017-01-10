@@ -62,3 +62,6 @@ local.properties
 .*browse*
 .DS_Store
 
+#codeblocks
+*.cbp
+*.layout

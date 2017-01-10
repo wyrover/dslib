@@ -6,7 +6,7 @@ ALL_UT=
 BIN_ARCH = 
 
 DSLIB_TOP = .
-DSLIB_BLD_DIR = $(DSLIB_TOP)/build
+DSLIB_BLD_DIR = $(DSLIB_TOP)/bin/Debug
 
 MODULE_NAME = ds
 MODULE_OBJ_NAME = libds.a
@@ -17,6 +17,7 @@ MODULE_OBJ_FILES = $(addprefix $(MODULE_BLD_DIR)/, $(patsubst %.cpp, %.o, $(wild
 CFLAGS = -I./ -Wall -Werror -g -std=c++11 -D ALL_UT=$(ALL_UT)
 LINKOPTS = 
 
+Debug: all
 all:  $(MODULE_BLD_DIR) $(MODULE_OBJ) testapp
 
 

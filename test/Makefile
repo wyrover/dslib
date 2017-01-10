@@ -5,7 +5,7 @@ CFLAGS = -I. -I../ -g -Wall -Werror
 LINKOPTS = 
 
 OBJ = dslib_ut.bin
-LIB = ../build/libds.a
+LIB = ../bin/Debug/libds.a
 
 all: $(OBJ) 
 
