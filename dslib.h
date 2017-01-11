@@ -17,6 +17,7 @@
 #include <string.h>
 #include <time.h>
 #include <exception>
+#include <stdexcept>
 #include <set>
 #include <map>
 #include <vector>

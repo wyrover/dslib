@@ -13,6 +13,7 @@
 #include "bst.h"
 #include "disjoint_set.h"
 #include "graph.h"
+#include "matrix.h"
 
 static void print_array(int a[], int n)
 {

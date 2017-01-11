@@ -6,6 +6,9 @@
  *
  */
 
+#ifndef __MATRIX_H
+#define __MATRIX_H
+
 #include "dslib.h"
 
 using namespace std;
@@ -42,8 +45,14 @@ class Matrix {
 template <class T>
 T Matrix<T>:: operator()(size_t i, size_t j) const
 {
+    if (i > _m) {
+        throw out_of_range("Matrix rows out of bounds");
+    }
+    if (j > _n) {
+        throw out_of_range("Matrix cols out of bounds");
+    }
 
-
+    return _values[ i*_m + j];
 
 
 }
@@ -59,7 +68,7 @@ T& Matrix<T>:: operator()(size_t i, size_t j)
 }
 
 
-
+#endif
 
 
 
