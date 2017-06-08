@@ -30,21 +30,42 @@ void Bst::insert(int data)
 
 void Bst::remove(int data)
 {
-    if(!(search(data))) {
+    BstNode* to_remove = NULL;
+ 
+
+    to_remove = closestNode(data);
+
+    if(!to_remove) {
         cout <<" Value not present to delete " << endl;
         return;
+    } else {
+        /* Two children */
+        if (to_remove->_pLeft && to_remove->_pRight) {
+
+        } else if ((to_remove->_pLeft != NULL) &&
+                    (to_remove->_pLeft != NULL)) {
+
+        } else if () {
+            
+        }
+
+        
+
     }
+
+
 
 }
 
 BstNode* Bst::search(int data)
 {
-    if(!_pRoot) {
+    BstNode* anchor = _pRoot;
+ 
+     if(!_pRoot) {
         return NULL;
     }
-
-    BstNode* anchor = _pRoot;
     while (anchor) {
+     
         if (data > anchor->_data) {
             anchor = anchor->_pRight;
         } else if (data < anchor->_data){
@@ -55,6 +76,7 @@ BstNode* Bst::search(int data)
     }
     return NULL;
 }
+ 
 
 BstNode* Bst::closestNode(int data)
 {
@@ -182,6 +204,21 @@ void Bst::_postOrder(BstNode* _pRoot)
 
 void Bst::_levelOrder(BstNode* _pRoot)
 {
+    queue<BstNode*> level_queue;
 
+    level_queue.push(_pRoot);
+
+    while(!level_queue.empty()) {
+        BstNode* temp = level_queue.front();
+        cout << "\t" << temp->_data;
+        if(temp->_pLeft) {
+            level_queue.push(temp->_pLeft);
+        }
+
+        if(temp->_pRight) {
+            level_queue.push(temp->_pRight);
+        }
+        level_queue.pop();
+    }
 }
 
