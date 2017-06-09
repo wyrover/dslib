@@ -221,6 +221,11 @@ void bst_ut()
     tree_1->inOrder();
     BstNode* closest_node = tree_1->closestNode(72);
     cout << "\n Closest Node to 72 is "<< closest_node->getData();
+    if (tree_1->isBst()) {
+        cout << "\nBST is True"<< endl;
+    } else {
+        cout << "\nBST is False"<< endl;
+    }
 }
 
 void djset_ut()

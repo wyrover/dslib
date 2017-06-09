@@ -28,6 +28,11 @@ void Bst::insert(int data)
     }
 }
 
+BstNode* Bst::_findInorderPred(BstNode* temp) {
+
+   return NULL;
+ }
+
 void Bst::remove(int data)
 {
     BstNode* to_remove = NULL;
@@ -107,16 +112,35 @@ BstNode* Bst::LCA(int value_1, int value_2)
 
 slist_t* Bst::toSlist()
 {
-
-
     return NULL;
+}
+
+bool Bst::_isBst(BstNode* temp, int min, int max)
+{
+    /*
+     *  if root is NULL, its a BST
+     *  Or if we managed to traverse till the leaf,
+     *  all the precedent nodes fulfilled the BST property.
+     */
+
+    if (!temp) {
+        return true;
+    }
+
+    if ((temp->_data < min) || (temp->_data > max)) {
+        return false;
+    }
+
+    return (_isBst(temp->_pLeft, min, temp->_data) && _isBst(temp->_pRight, temp->_data, max));
 }
 
 bool Bst::isBst()
 {
 
+    BstNode* anchor = _pRoot;
+    bool res = _isBst(anchor, INT_MIN, INT_MAX);
 
-    return false;
+    return res;
 }
 
 bool Bst::isBalanced()

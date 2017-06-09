@@ -25,6 +25,9 @@ class Bst {
         void _preOrder(BstNode* _pRoot);
         void _postOrder(BstNode* _pRoot);
         void _levelOrder(BstNode* _pRoot);
+        BstNode* _findInorderPred(BstNode* temp);
+        bool     _isBst(BstNode* temp, int min, int max);
+        bool     _isBalanced();
 
     public:
         Bst():   _pRoot(NULL) {};
