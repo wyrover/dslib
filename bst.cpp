@@ -18,12 +18,12 @@ void Bst::insert(int data)
         cout <<"Value already present" <<endl;
         return;
     } else {
-        BstNode* anchor = closestNode(data);
+        BstNode* ancestor = findAncestor(data);
         BstNode* newNode = new BstNode(data);
-        if (data > anchor->_data) {
-            anchor->_pRight = newNode;
+        if (data > ancestor->_data) {
+            ancestor->_pRight = newNode;
         } else {
-            anchor->_pLeft = newNode;
+            ancestor->_pLeft = newNode;
         }
     }
 }
@@ -36,28 +36,34 @@ BstNode* Bst::_findInorderPred(BstNode* temp) {
 void Bst::remove(int data)
 {
     BstNode* to_remove = NULL;
- 
+    BstNode* ancestor = NULL;
 
-    to_remove = closestNode(data);
-
-    if(!to_remove) {
-        cout <<" Value not present to delete " << endl;
+    to_remove = search(data);
+    if (!to_remove) {
+        cout <<"Value not present" <<endl;
         return;
-    } else {
-        /* Two children */
-        if (to_remove->_pLeft && to_remove->_pRight) {
-
-        } else if ((to_remove->_pLeft != NULL) &&
-                    (to_remove->_pLeft != NULL)) {
-
-        } else if () {
-            
-        }
-
-        
-
     }
 
+    ancestor = findAncestor(data);
+
+    /* Two children */
+    if (to_remove->_pLeft && to_remove->_pRight) {
+
+    } else if ((to_remove->_pLeft != NULL) &&
+            (to_remove->_pRight == NULL)) { /* One left child */
+
+    } else if ((to_remove->_pRight != NULL ) &&
+            (to_remove->_pLeft == NULL)) { /* One right child */
+
+    } else { /* Leaf node - no children*/
+        if (ancestor->_pRight->_data == to_remove->_data) {
+            ancestor->_pRight = NULL;
+            delete to_remove;
+        } else {
+            ancestor->_pRight = NULL;
+            delete to_remove;
+        }
+    }
 
 
 }
@@ -65,12 +71,12 @@ void Bst::remove(int data)
 BstNode* Bst::search(int data)
 {
     BstNode* anchor = _pRoot;
- 
+
      if(!_pRoot) {
         return NULL;
     }
     while (anchor) {
-     
+
         if (data > anchor->_data) {
             anchor = anchor->_pRight;
         } else if (data < anchor->_data){
@@ -81,9 +87,9 @@ BstNode* Bst::search(int data)
     }
     return NULL;
 }
- 
 
-BstNode* Bst::closestNode(int data)
+
+BstNode* Bst::findAncestor(int data)
 {
     if(!_pRoot) {
         return NULL;

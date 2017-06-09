@@ -34,7 +34,7 @@ class Bst {
         void     insert(int data);
         void     remove (int data);
         BstNode* search (int data);
-        BstNode* closestNode(int value);
+        BstNode* findAncestor(int value);
         BstNode* LCA(int value_1, int value_2);
         slist_t* toSlist();
         bool     isBst();

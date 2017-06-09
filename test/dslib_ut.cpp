@@ -219,7 +219,7 @@ void bst_ut()
     tree_1->insert(56);
     tree_1->insert(72);
     tree_1->inOrder();
-    BstNode* closest_node = tree_1->closestNode(72);
+    BstNode* closest_node = tree_1->findAncestor(72);
     cout << "\n Closest Node to 72 is "<< closest_node->getData();
     if (tree_1->isBst()) {
         cout << "\nBST is True"<< endl;
@@ -278,9 +278,9 @@ int main()
     run_ut(lin_search_ut, "lin_search");
     run_ut(bin_search_ut, "bin_search");
     run_ut(skip_list_ut,"skip_list");
-    run_ut(bst_ut, "bst");
     run_ut(djset_ut, "disjoint_set");
-    #endif
     run_ut(graph_ut, "graph");
+    #endif
+    run_ut(bst_ut, "bst");
     return 0;
 }
