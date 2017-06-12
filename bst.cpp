@@ -44,6 +44,13 @@ void Bst::remove(int data)
         return;
     }
 
+    /* Only the root node is present in the BST */
+    if ((to_remove == _pRoot) &&
+        !_pRoot->_pRight &&  !_pRoot->_pLeft ) {
+        delete _pRoot;
+        _pRoot = NULL;
+    }
+
     ancestor = findAncestor(data);
 
     /* Two children */
@@ -52,9 +59,31 @@ void Bst::remove(int data)
     } else if ((to_remove->_pLeft != NULL) &&
             (to_remove->_pRight == NULL)) { /* One left child */
 
+
+            if (ancestor->_pRight == to_remove) { 
+                 /*to_remove node is a rchild to the ancestor
+                  *Point ancestor's pright to lchild of to_remove
+                  */
+                ancestor->_pRight = to_remove->_pLeft;
+            } else if (ancestor->_pLeft == to_remove) {
+                ancestor->_pLeft = to_remove->_pLeft;         
+            }
+            
+            delete to_remove;
     } else if ((to_remove->_pRight != NULL ) &&
             (to_remove->_pLeft == NULL)) { /* One right child */
 
+            if (ancestor->_pRight == to_remove) {
+
+                 /*to_remove node is a rchild to the ancestor
+                  *Point ancestor's pright to rchild of to_remove
+                  */
+                ancestor->_pRight = to_remove->_pRight;
+            } else if (ancestor->_pLeft == to_remove) {
+                ancestor->_pLeft = to_remove->_pRight;         
+            }
+
+            delete to_remove;
     } else { /* Leaf node - no children*/
         if (ancestor->_pRight->_data == to_remove->_data) {
             ancestor->_pRight = NULL;
