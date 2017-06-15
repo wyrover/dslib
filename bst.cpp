@@ -28,10 +28,12 @@ void Bst::insert(int data)
     }
 }
 
-BstNode* Bst::_findInorderPred(BstNode* temp) {
+BstNode* Bst::_findInorderSucc(BstNode* temp) {
+
 
    return NULL;
  }
+
 
 void Bst::remove(int data)
 {
@@ -56,19 +58,23 @@ void Bst::remove(int data)
     /* Two children */
     if (to_remove->_pLeft && to_remove->_pRight) {
 
+//        BstNode* inorder_succ = _findInorderSucc(to_remove);
+
+
+
     } else if ((to_remove->_pLeft != NULL) &&
             (to_remove->_pRight == NULL)) { /* One left child */
 
 
-            if (ancestor->_pRight == to_remove) { 
+            if (ancestor->_pRight == to_remove) {
                  /*to_remove node is a rchild to the ancestor
                   *Point ancestor's pright to lchild of to_remove
                   */
                 ancestor->_pRight = to_remove->_pLeft;
             } else if (ancestor->_pLeft == to_remove) {
-                ancestor->_pLeft = to_remove->_pLeft;         
+                ancestor->_pLeft = to_remove->_pLeft;
             }
-            
+
             delete to_remove;
     } else if ((to_remove->_pRight != NULL ) &&
             (to_remove->_pLeft == NULL)) { /* One right child */
@@ -80,7 +86,7 @@ void Bst::remove(int data)
                   */
                 ancestor->_pRight = to_remove->_pRight;
             } else if (ancestor->_pLeft == to_remove) {
-                ancestor->_pLeft = to_remove->_pRight;         
+                ancestor->_pLeft = to_remove->_pRight;
             }
 
             delete to_remove;
@@ -148,34 +154,6 @@ BstNode* Bst::LCA(int value_1, int value_2)
 slist_t* Bst::toSlist()
 {
     return NULL;
-}
-
-bool Bst::_isBst(BstNode* temp, int min, int max)
-{
-    /*
-     *  if root is NULL, its a BST
-     *  Or if we managed to traverse till the leaf,
-     *  all the precedent nodes fulfilled the BST property.
-     */
-
-    if (!temp) {
-        return true;
-    }
-
-    if ((temp->_data < min) || (temp->_data > max)) {
-        return false;
-    }
-
-    return (_isBst(temp->_pLeft, min, temp->_data) && _isBst(temp->_pRight, temp->_data, max));
-}
-
-bool Bst::isBst()
-{
-
-    BstNode* anchor = _pRoot;
-    bool res = _isBst(anchor, INT_MIN, INT_MAX);
-
-    return res;
 }
 
 bool Bst::isBalanced()

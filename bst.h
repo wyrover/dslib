@@ -25,9 +25,11 @@ class Bst {
         void _preOrder(BstNode* _pRoot);
         void _postOrder(BstNode* _pRoot);
         void _levelOrder(BstNode* _pRoot);
-        BstNode* _findInorderPred(BstNode* temp);
         bool     _isBst(BstNode* temp, int min, int max);
         bool     _isBalanced();
+
+
+        BstNode* _findInorderSucc(BstNode* temp);
 
     public:
         Bst():   _pRoot(NULL) {};
@@ -35,16 +37,18 @@ class Bst {
         void     remove (int data);
         BstNode* search (int data);
         BstNode* findAncestor(int value);
-        BstNode* LCA(int value_1, int value_2);
-        slist_t* toSlist();
-        bool     isBst();
-        bool     isBalanced();
-        bool     isMirror(BstNode* root);
+
         void     mirror();
         bool     hasPathSum();
         void     inOrder();
         void     postOrder();
         void     preOrder();
         void     levelOrder();
+
+        BstNode* LCA(int value_1, int value_2);
+        slist_t* toSlist();
+        bool     isBalanced();
+        bool     isMirror(BstNode* root);
+        int      height(BstNode* root);
 };
 
