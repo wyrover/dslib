@@ -22,6 +22,7 @@
 #include <map>
 #include <vector>
 #include <queue>
+#include <memory>
 
 using namespace std;
 
