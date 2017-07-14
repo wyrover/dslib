@@ -14,6 +14,7 @@
 #include "disjoint_set.h"
 #include "graph.h"
 #include "matrix.h"
+#include "trie.h"
 
 static void print_array(int a[], int n)
 {
@@ -259,10 +260,35 @@ void graph_ut()
     //g->bfs("2");
 }
 
+void trie_ut()
+{
+	Trie* t = new Trie();
+	string line;
+	ifstream word_file ("words.txt");
+
+	if (word_file.is_open())
+	{
+		while ( getline (word_file,line) )
+		{
+			t->insertIntoTrie(line);
+		}
+		word_file.close();
+	} else {
+
+		cout << "Unable to open file";
+
+	}
+
+
+//	t->printAllWords();
+	cout <<"Words starting with 'zymo' in the English language " <<endl;
+	t->getWordsWithPref("zymo");
+
+}
 
 int main()
 {
-    #ifdef ALL_UT
+    #if 0
     run_ut(slist_ut, "slist");
     run_ut(merge_sort_ut,"merge_sort");
     run_ut(quick_sort_ut,"quick_sort");
@@ -275,7 +301,9 @@ int main()
     run_ut(skip_list_ut,"skip_list");
     run_ut(djset_ut, "disjoint_set");
     run_ut(graph_ut, "graph");
-    #endif
     run_ut(bst_ut, "bst");
+    #endif
+
+    run_ut(trie_ut, "trie");
     return 0;
 }
