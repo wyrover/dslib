@@ -27,13 +27,13 @@ void Trie::insertIntoTrie(string word)
 
     for (auto &c : word)
     {
-        map<char, TrieNode*>::const_iterator it =
+        map<char, TrieNode *>::const_iterator it =
             nav->_children.find(c);
 
         if (it == nav->_children.end())
         {
             /* No child exists with this character. Create one */
-            TrieNode* _child = new TrieNode(c);
+            TrieNode *_child = new TrieNode(c);
 
             if (char_count == word_len - 1)
             {
@@ -62,41 +62,76 @@ void Trie::insertIntoTrie(string word)
     }
 }
 
-void Trie::_deletehelper(TrieNode* node, char prev_c)
+void Trie::_deletehelper(TrieNode *node, char prev_c)
 {
-    if((node->_num_children > 1) || (node->_is_word)) {
+    /* If a character node is the last letter in a valid word
+      * or if a node is a fork, return
+      */
+    if ((node->_num_children > 1) || (node->_is_word))
+    {
         node->_children.erase(prev_c);
         return;
-    } else {
+    }
+    else
+    {
+        /* Delete the node after storing the parent and the current character in "prev_c"
+         * We need to propagate the character to the last recursion stack so that
+         * the children map entry for this character can be removed 
+         *
+         *          m
+                    a
+                 r  t   n
+                    c
+                    h
+                    e
+                    r   
+        * Ex: To delete "matcher", the recursion will stop at 'h' 
+        * since "match" is a word in itself and shouldnt be deleted.
+        * The 'h' node would have a child map entry to 'e'
+        * But the 'e' node would have been deleted in a previous recursion stack. We should remove
+        * this mapping for the 'e' node. This is why we propagate "prev_c".
+        */
 
-        TrieNode* tmp = node->_parent;
+        TrieNode *tmp = node->_parent;
         char prev_c = node->_c;
         delete node;
         return _deletehelper(tmp, prev_c);
-
     }
 }
-
 
 bool Trie::deleteFromTrie(string word)
 {
 
+    /* Get the last letter character node for this string in the Trie */
     TrieNode *leaf_node = getPrefNode(word);
 
-
+    /* The word to delete doesnt exist */
     if (!leaf_node)
     {
-            return false;
+        return false;
     }
 
-    if (leaf_node->_num_children) {
+    /* if the last character node has children
+     * Just set is_word to false and return
+     * The word to delete is a part of a bigger word
+     * and should not be deleted in memory
+     */
+    if (leaf_node->_num_children)
+    {
         leaf_node->_is_word = false;
         return true;
     }
-    TrieNode* parent_to_leaf = leaf_node->_parent;
+
+    /* Get the parent node to leaf and the last character in the string*/
+
+    TrieNode *parent_to_leaf = leaf_node->_parent;
     char prev_c = leaf_node->_c;
 
+    /* Delete the last character node */
     delete leaf_node;
+    /* Recursively delete all node till a word or a fork is encountered
+     * A fork is a node that has multiple child nodes
+     */
     _deletehelper(parent_to_leaf, prev_c);
     return true;
 }
@@ -133,7 +168,7 @@ TrieNode *Trie::getPrefNode(const string &prefix)
 
     for (auto &c : prefix)
     {
-        map<char, TrieNode*>::const_iterator it =
+        map<char, TrieNode *>::const_iterator it =
             nav->_children.find(c);
 
         if (it == nav->_children.end())
