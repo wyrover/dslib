@@ -15,25 +15,25 @@ TrieNode::~TrieNode()
 
 Trie::Trie()
 {
-    this->_root = unique_ptr<TrieNode>(new TrieNode());
+    this->_root = new TrieNode();
     _num_words = 0;
 }
 
 void Trie::insertIntoTrie(string word)
 {
-    TrieNode *nav = _root.get();
+    TrieNode *nav = _root;
     int word_len = word.size();
     int char_count = 0;
 
     for (auto &c : word)
     {
-        map<char, unique_ptr<TrieNode>>::const_iterator it =
+        map<char, TrieNode*>::const_iterator it =
             nav->_children.find(c);
 
         if (it == nav->_children.end())
         {
             /* No child exists with this character. Create one */
-            unique_ptr<TrieNode> _child(new TrieNode(c));
+            TrieNode* _child = new TrieNode(c);
 
             if (char_count == word_len - 1)
             {
@@ -41,7 +41,7 @@ void Trie::insertIntoTrie(string word)
             }
 
             _child->_parent = nav;
-            TrieNode *tmp = _child.get();
+            TrieNode *tmp = _child;
             nav->_children.insert(make_pair(c, move(_child)));
             nav->_num_children++;
 
@@ -50,7 +50,7 @@ void Trie::insertIntoTrie(string word)
         }
         else
         {
-            nav = it->second.get();
+            nav = it->second;
         }
 
         if (char_count == word_len - 1)
@@ -62,15 +62,42 @@ void Trie::insertIntoTrie(string word)
     }
 }
 
+void Trie::_deletehelper(TrieNode* node, char prev_c)
+{
+    if((node->_num_children > 1) || (node->_is_word)) {
+        node->_children.erase(prev_c);
+        return;
+    } else {
+
+        TrieNode* tmp = node->_parent;
+        char prev_c = node->_c;
+        delete node;
+        return _deletehelper(tmp, prev_c);
+
+    }
+}
+
+
 bool Trie::deleteFromTrie(string word)
 {
 
     TrieNode *leaf_node = getPrefNode(word);
 
+
     if (!leaf_node)
     {
-        return false;
+            return false;
     }
+
+    if (leaf_node->_num_children) {
+        leaf_node->_is_word = false;
+        return true;
+    }
+    TrieNode* parent_to_leaf = leaf_node->_parent;
+    char prev_c = leaf_node->_c;
+
+    delete leaf_node;
+    _deletehelper(parent_to_leaf, prev_c);
     return true;
 }
 
@@ -99,14 +126,14 @@ void Trie::printAllWords()
 
 TrieNode *Trie::getPrefNode(const string &prefix)
 {
-    TrieNode *nav = _root.get();
+    TrieNode *nav = _root;
     int pref_len = prefix.size();
     int char_count = 0;
     bool pref_found = true;
 
     for (auto &c : prefix)
     {
-        map<char, unique_ptr<TrieNode>>::const_iterator it =
+        map<char, TrieNode*>::const_iterator it =
             nav->_children.find(c);
 
         if (it == nav->_children.end())
@@ -120,7 +147,7 @@ TrieNode *Trie::getPrefNode(const string &prefix)
         }
         else
         {
-            nav = it->second.get();
+            nav = it->second;
         }
         char_count++;
     }

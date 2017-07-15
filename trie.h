@@ -13,7 +13,7 @@ class TrieNode
     bool _is_word;
     int _num_children;
     TrieNode *_parent;
-    map<char, unique_ptr<TrieNode>> _children;
+    map<char, TrieNode* > _children;
 
   public:
     TrieNode(char c);
@@ -26,9 +26,10 @@ class Trie
 
   private:
     int _num_words;
-    unique_ptr<TrieNode> _root;
+    TrieNode* _root;
     void _print(string &prefix, const TrieNode &node);
     TrieNode *getPrefNode(const string &prefix);
+    void _deletehelper(TrieNode* leaf_node, char c);
 
   public:
     void insertIntoTrie(string word);

@@ -270,7 +270,7 @@ void trie_ut()
 {
     Trie *t = new Trie();
     string line;
-    ifstream word_file("words.txt");
+    ifstream word_file("words_1.txt");
 
     if (word_file.is_open())
     {
@@ -286,9 +286,37 @@ void trie_ut()
         cout << "Unable to open file";
     }
 
-    //	t->printAllWords();
-    cout << "Words starting with 'ni' in the English language " << endl;
-    t->getWordsWithPref("niv");
+    t->printAllWords();
+
+
+    if(!(t->deleteFromTrie("catch"))) {
+        cout <<"Could not delete" <<endl;
+
+    } else {
+        cout <<"Catch Deleted successfully " <<endl;
+
+    }
+
+    if(!(t->deleteFromTrie("dogged"))) {
+        cout <<"Could not delete" <<endl;
+
+    } else {
+        cout <<"Dogged Deleted successfully " <<endl;
+
+    }
+
+
+    if(!(t->deleteFromTrie("salami"))) {
+        cout <<"Could not delete" <<endl;
+
+    } else {
+        cout <<"Salami Deleted successfully " <<endl;
+
+    }
+
+    cout <<endl<<endl<<endl;
+
+    t->printAllWords();
 }
 
 int main()
